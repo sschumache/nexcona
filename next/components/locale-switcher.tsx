@@ -4,50 +4,65 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
-import { useSlugContext } from '@/app/context/SlugContext';
 import { cn } from '@/lib/utils';
 
-export function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
-  const { state } = useSlugContext();
-  const { localizedSlugs } = state;
+const localeLabels: Record<string, string> = {
+  en: 'EN',
+  de: 'DE',
+};
 
-  const pathname = usePathname(); // Current path
-  const segments = pathname.split('/'); // Split path into segments
+export function LocaleSwitcher({
+  currentLocale,
+  locales = [],
+}: {
+  currentLocale: string;
+  locales?: string[];
+}) {
+  const pathname = usePathname();
 
-  // Generate localized path for each locale
   const generateLocalizedPath = (locale: string): string => {
-    if (!pathname) return `/${locale}`; // Default to root path for the locale
+    if (!pathname) return `/${locale}`;
 
-    // Handle homepage (e.g., "/en" -> "/fr")
-    if (segments.length <= 2) {
+    const cleanPath = pathname.replace(/\/$/, '');
+    const cleanSegments = cleanPath.split('/');
+
+    if (cleanSegments.length <= 2) {
       return `/${locale}`;
     }
 
-    // Handle dynamic paths (e.g., "/en/blog/[slug]")
-    if (localizedSlugs[locale]) {
-      segments[1] = locale; // Replace the locale
-      segments[segments.length - 1] = localizedSlugs[locale]; // Replace slug if available
-      return segments.join('/');
-    }
-
-    // Fallback to replace only the locale
-    segments[1] = locale;
-    return segments.join('/');
+    const newSegments = [...cleanSegments];
+    newSegments[1] = locale;
+    return newSegments.join('/');
   };
 
   return (
     <div className="flex gap-2 p-1 rounded-md">
-      {Object.keys(localizedSlugs).map((locale) => (
+      {locales.map((locale) => (
         <Link key={locale} href={generateLocalizedPath(locale)}>
           <div
             className={cn(
-              'flex cursor-pointer items-center justify-center text-sm leading-[110%] w-8 py-1 rounded-md hover:bg-neutral-800 hover:text-white/80 text-white hover:shadow-[0px_1px_0px_0px_var(--neutral-600)_inset] transition duration-200',
+              'flex cursor-pointer items-center justify-center text-sm leading-[110%] w-8 py-1 rounded-md transition duration-200',
               locale === currentLocale
-                ? 'bg-neutral-800 text-white shadow-[0px_1px_0px_0px_var(--neutral-600)_inset]'
-                : ''
+                ? 'text-white'
+                : 'text-[#2B2B2B] hover:text-white'
             )}
+            style={
+              locale === currentLocale
+                ? { backgroundColor: '#00AEEF' }
+                : undefined
+            }
+            onMouseEnter={(e) => {
+              if (locale !== currentLocale) {
+                e.currentTarget.style.backgroundColor = '#00AEEF';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (locale !== currentLocale) {
+                e.currentTarget.style.backgroundColor = '';
+              }
+            }}
           >
-            {locale}
+            {localeLabels[locale] ?? locale.toUpperCase()}
           </div>
         </Link>
       ))}
