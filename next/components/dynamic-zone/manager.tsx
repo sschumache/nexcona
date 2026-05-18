@@ -46,6 +46,9 @@ const componentMapping: { [key: string]: any } = {
   'dynamic-zone.related-articles': dynamic(() =>
     import('./related-articles').then((mod) => mod.RelatedArticles)
   ),
+  'dynamic-zone.team': dynamic(() =>
+  import('./team').then((mod) => mod.Team)
+  ),
 };
 
 const DynamicZoneManager: React.FC<Props> = ({ dynamicZone, locale }) => {
