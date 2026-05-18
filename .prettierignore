@@ -38,3 +38,12 @@ Thumbs.db
 
 # Temporary files
 .tmp
+
+# Env files
+.env
+.env.local
+.env*.local
+.env.production
+.env*.production
+.env.staging
+.env*.staging

@@ -3,6 +3,12 @@ docs
 .DS_Store
 .vscode
 .env
+.env.local
+.env*.local
+.env.production
+.env*.production
+.env.staging
+.env*.staging
 .claude/settings.local.json
 .pnp.*
 .yarn/*
