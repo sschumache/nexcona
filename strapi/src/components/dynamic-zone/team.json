@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_dynamic_zone_teams",
+  "info": {
+    "displayName": "Team",
+    "icon": "user"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "teams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::team.team"
+    }
+  },
+  "config": {}
+}

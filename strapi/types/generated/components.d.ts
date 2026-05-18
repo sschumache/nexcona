@@ -224,6 +224,20 @@ export interface DynamicZoneRelatedProducts extends Struct.ComponentSchema {
   };
 }
 
+export interface DynamicZoneTeam extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_teams';
+  info: {
+    displayName: 'Team';
+    icon: 'user';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText;
+    subtitle: Schema.Attribute.String & Schema.Attribute.Required;
+    teams: Schema.Attribute.Relation<'oneToMany', 'api::team.team'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface DynamicZoneTestimonials extends Struct.ComponentSchema {
   collectionName: 'components_dynamic_zone_testimonials';
   info: {
@@ -523,6 +537,7 @@ declare module '@strapi/strapi' {
       'dynamic-zone.pricing': DynamicZonePricing;
       'dynamic-zone.related-articles': DynamicZoneRelatedArticles;
       'dynamic-zone.related-products': DynamicZoneRelatedProducts;
+      'dynamic-zone.team': DynamicZoneTeam;
       'dynamic-zone.testimonials': DynamicZoneTestimonials;
       'global.footer': GlobalFooter;
       'global.navbar': GlobalNavbar;
