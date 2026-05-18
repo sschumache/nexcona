@@ -14,11 +14,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        charcoal: '#08090A',
-        lightblack: '#1C1C1C',
-        secondary: '#E6E6E6',
-        muted: 'var(--neutral-200)',
+        background: '#FFFFFF',
+        foreground: '#2B2B2B',
+
+        primary: '#003F6B',
+        'primary-soft': '#306B8C',
+        'primary-light': '#00AEEF',
+
+        light: '#E2E2E2',
+        grey: '#666666',
+        dark: '#2B2B2B',
+
+        button: '#E2E2E2',
+        'button-hover': '#2B2B2B',
       },
+
       boxShadow: {
         derek: `0px 0px 0px 1px rgb(0 0 0 / 0.06),
         0px 1px 1px -0.5px rgb(0 0 0 / 0.06),
