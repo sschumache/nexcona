@@ -1,7 +1,13 @@
 import { AmbientColor } from '@/components/decorations/ambient-color';
 import DynamicZoneManager from '@/components/dynamic-zone/manager';
 
-export default function PageContent({ pageData }: { pageData: any }) {
+export default function PageContent({
+  pageData,
+  locale,
+}: {
+  pageData: any;
+  locale: string;
+}) {
   const dynamicZone = pageData?.dynamic_zone;
   return (
     <div className="relative overflow-hidden w-full">
@@ -9,7 +15,7 @@ export default function PageContent({ pageData }: { pageData: any }) {
       {dynamicZone && (
         <DynamicZoneManager
           dynamicZone={dynamicZone}
-          locale={pageData.locale}
+          locale={locale}
         />
       )}
     </div>
