@@ -20,7 +20,7 @@ const pagePopulate = {
       'dynamic-zone.cta': { populate: { CTAs: true } },
       'dynamic-zone.faq': { populate: { faqs: true } },
       'dynamic-zone.form-next-to-section': { populate: '*' },
-      'dynamic-zone.team': { populate: { teams: { populate: { image: true } } } },
+      'dynamic-zone.team': { populate: { teams: { populate: '*'  } } },
     },
   },
 };
